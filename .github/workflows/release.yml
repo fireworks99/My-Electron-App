@@ -32,4 +32,4 @@ jobs:
       - name: Publish to GitHub
         run: npx electron-forge publish
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
