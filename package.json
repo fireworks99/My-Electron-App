@@ -62,7 +62,7 @@
               "name": "My-Electron-App"
             },
             "prerelease": false,
-            "draft": true
+            "draft": false
           }
         }
       ]
