@@ -1,0 +1,35 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*' # 当推送标签以 "v" 开头时触发（如 v1.0.0）
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: 检出代码
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: 设置 Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18 # Node.js 版本
+
+      # Step 3: 安装依赖
+      - name: Install Dependencies
+        run: npm install
+
+      # Step 4: 打包应用
+      - name: Build Electron App
+        run: npm run make
+
+      # Step 5: 发布到 GitHub Releases
+      - name: Publish to GitHub
+        run: npx electron-forge publish
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
